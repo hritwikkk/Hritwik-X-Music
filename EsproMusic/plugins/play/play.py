@@ -629,6 +629,8 @@ async def slider_queries(client, CallbackQuery, _):
         except:
             pass
         title, duration_min, thumbnail, vidid = await YouTube.slider(query, query_type)
+        if not title:
+            title = "None"
         buttons = slider_markup(_, vidid, user_id, query, query_type, cplay, fplay)
         med = InputMediaPhoto(
             media=thumbnail,
@@ -661,3 +663,4 @@ async def slider_queries(client, CallbackQuery, _):
         return await CallbackQuery.edit_message_media(
             media=med, reply_markup=InlineKeyboardMarkup(buttons)
         )
+
